@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -17,6 +18,8 @@ class TenantDashboardController extends Controller
             'tenant_name' => $tenant?->name ?? 'Tenant',
             'tenant_id' => $tenant?->id,
             'tenant_plan' => $tenant?->data['plan'] ?? 'basic',
+            'product_count' => Product::count(),
+            'inventory_value' => (float) Product::query()->selectRaw('COALESCE(SUM(price * stock), 0) as total')->value('total'),
         ]);
     }
 

@@ -14,7 +14,7 @@ use Stancl\Tenancy\TenantDatabaseManagers\SQLiteDatabaseManager;
 use Stancl\Tenancy\UUIDGenerator;
 
 return [
-    'tenant_model' => app\Models\Tenant::class,
+    'tenant_model' => App\Models\Tenant::class,
     'id_generator' => UUIDGenerator::class,
 
     'domain_model' => Domain::class,

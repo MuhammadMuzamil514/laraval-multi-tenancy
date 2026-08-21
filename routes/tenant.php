@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\TenantDashboardController;
+use App\Http\Controllers\TenantProductController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -24,7 +25,11 @@ Route::domain('{tenantDomain}.localhost')
         'web',
         InitializeTenancyByDomain::class,
         PreventAccessFromCentralDomains::class,
+        'auth',
     ])
     ->group(function () {
         Route::get('/', [TenantDashboardController::class, 'index'])->name('tenant.dashboard');
+        Route::resource('products', TenantProductController::class)
+            ->except(['show'])
+            ->names('tenant.products');
     });

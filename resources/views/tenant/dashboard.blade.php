@@ -15,6 +15,17 @@
                 <p><strong>Tenant ID:</strong> {{ $tenant_id }}</p>
                 <p><strong>Plan:</strong> {{ $tenant_plan }}</p>
             </div>
+            <div class="mt-8 grid gap-4 sm:grid-cols-2">
+                <div class="rounded border p-4">
+                    <p class="text-sm text-gray-500">Products</p>
+                    <p class="mt-1 text-3xl font-bold">{{ $product_count }}</p>
+                </div>
+                <div class="rounded border p-4">
+                    <p class="text-sm text-gray-500">Inventory value</p>
+                    <p class="mt-1 text-3xl font-bold">${{ number_format($inventory_value, 2) }}</p>
+                </div>
+            </div>
+            <a class="mt-8 inline-block rounded bg-gray-900 px-4 py-2 font-semibold text-white" href="{{ route('tenant.products.index', ['tenantDomain' => $tenant_id]) }}">Manage products</a>
         </div>
     </div>
 </body>
