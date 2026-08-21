@@ -1,0 +1,41 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Products') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-medium">All products</h3>
+                        <a href="{{ route('products.create') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
+                            Create product
+                        </a>
+                    </div>
+
+                    @if ($products->isEmpty())
+                        <p class="text-gray-500">No products yet.</p>
+                    @else
+                        <div class="space-y-4">
+                            @foreach ($products as $product)
+                                <div class="border rounded-lg p-4 flex items-center justify-between">
+                                    <div>
+                                        <p class="font-semibold">{{ $product->name }}</p>
+                                        <p class="text-sm text-gray-500">{{ $product->price }} / stock: {{ $product->stock }}</p>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <a href="{{ route('products.show', $product) }}" class="text-sm text-indigo-600 hover:text-indigo-500">View</a>
+                                        <a href="{{ route('products.edit', $product) }}" class="text-sm text-gray-600 hover:text-gray-500">Edit</a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
