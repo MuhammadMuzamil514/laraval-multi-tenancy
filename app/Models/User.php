@@ -17,7 +17,14 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    protected $connection = 'mysql';
+    /**
+     * Users live in the central database, so always resolve the central
+     * connection even while tenancy has swapped the default connection.
+     */
+    public function getConnectionName(): ?string
+    {
+        return config('tenancy.database.central_connection');
+    }
 
     /**
      * Get the attributes that should be cast.

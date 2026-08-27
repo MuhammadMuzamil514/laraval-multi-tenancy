@@ -10,6 +10,7 @@
 /.idea
 /.nova
 /.phpunit.cache
+/database/tenant*
 /.vscode
 /.zed
 /auth.json
